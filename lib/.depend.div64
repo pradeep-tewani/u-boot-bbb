@@ -1,0 +1,8 @@
+div64.o: div64.c \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/types.h \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/config.h \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/posix_types.h \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/stddef.h \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/asm/posix_types.h \
+ /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/asm/types.h \
+ /home/expert/EmbeddedLinux/BBB/Toolchain/gcc-linaro-arm-linux-gnueabihf-4.8-2014.04_linux/lib/gcc/arm-linux-gnueabihf/4.8.3/include/stdbool.h
