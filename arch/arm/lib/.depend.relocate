@@ -1,4 +1,0 @@
-relocate.o: relocate.S \
- /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/linkage.h \
- /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/asm/linkage.h \
- /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/config.h

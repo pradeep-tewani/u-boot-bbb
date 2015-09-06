@@ -95,6 +95,7 @@ static void print_mmcinfo(struct mmc *mmc)
 static struct mmc *init_mmc_device(int dev, bool force_init)
 {
 	struct mmc *mmc;
+	printf("In init_mmc_device, device is %d\n", dev);
 	mmc = find_mmc_device(dev);
 	if (!mmc) {
 		printf("no mmc device at slot %x\n", dev);
@@ -617,6 +618,7 @@ static int do_mmcops(cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 	cmd_tbl_t *cp;
 
 	cp = find_cmd_tbl(argv[1], cmd_mmc, ARRAY_SIZE(cmd_mmc));
+	printf("In do ops\n");
 
 	/* Drop the mmc command */
 	argc--;

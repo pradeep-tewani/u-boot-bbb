@@ -279,7 +279,6 @@ unsigned int i2c_get_bus_num(void)
 int i2c_set_bus_num(unsigned int bus)
 {
 	int max;
-	printf("I2s set bus num called\n");
 
 	if ((bus == I2C_BUS) && (I2C_ADAP->init_done > 0))
 		return 0;

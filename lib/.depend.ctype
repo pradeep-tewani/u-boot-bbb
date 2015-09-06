@@ -1,2 +1,0 @@
-ctype.o: ctype.c \
- /home/expert/EmbeddedLinux/BBB/UBoot/u-boot/include/linux/ctype.h
