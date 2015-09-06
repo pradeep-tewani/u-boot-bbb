@@ -11,9 +11,6 @@ source "drivers/serial/Kconfig"
 
 source "drivers/i2c/Kconfig"
 
-source "drivers/spi/Kconfig"
-
-
 
 
 source "drivers/watchdog/Kconfig"
@@ -21,7 +18,6 @@ source "drivers/watchdog/Kconfig"
 
 
 
-source "drivers/dfu/Kconfig"
 
 source "drivers/mmc/Kconfig"
 
