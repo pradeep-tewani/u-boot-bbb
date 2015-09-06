@@ -139,13 +139,11 @@ void board_init_r(gd_t *dummy1, ulong dummy2)
 			CONFIG_SYS_SPL_MALLOC_SIZE);
 #endif
 
-#ifndef CONFIG_PPC
 	/*
 	 * timer_init() does not exist on PPC systems. The timer is initialized
 	 * and enabled (decrementer) in interrupt_init() here.
 	 */
 	timer_init();
-#endif
 
 #ifdef CONFIG_SPL_BOARD_INIT
 	spl_board_init();

@@ -637,7 +637,7 @@ libs-y += $(if $(BOARDDIR),board/$(BOARDDIR)/)
 
 libs-y := $(sort $(libs-y))
 
-u-boot-dirs	:= $(patsubst %/,%,$(filter %/, $(libs-y))) tools examples
+u-boot-dirs	:= $(patsubst %/,%,$(filter %/, $(libs-y))) tools
 
 u-boot-alldirs	:= $(sort $(u-boot-dirs) $(patsubst %/,%,$(filter %/, $(libs-))))
 
@@ -1213,7 +1213,7 @@ clean: rm-files := $(CLEAN_FILES)
 
 clean-dirs	:= $(foreach f,$(u-boot-alldirs),$(if $(wildcard $(srctree)/$f/Makefile),$f))
 
-clean-dirs      := $(addprefix _clean_, $(clean-dirs) doc/DocBook)
+clean-dirs      := $(addprefix _clean_, $(clean-dirs))
 
 PHONY += $(clean-dirs) clean archclean
 $(clean-dirs):
