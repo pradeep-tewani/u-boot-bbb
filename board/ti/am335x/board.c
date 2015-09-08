@@ -81,7 +81,7 @@ static int read_eeprom(struct am335x_baseboard_id *header)
 	return 0;
 }
 
-int do_userbutton (cmd_tbl_t *cmdtp, int flag, int argc, char *argv[])
+int do_userbutton (cmd_tbl_t *cmdtp, int flag, int argc, char * const argv[])
 {
 	int button = 0;
 	gpio_direction_input(72);
@@ -303,9 +303,6 @@ int board_init(void)
 #endif
 
 	gd->bd->bi_boot_params = CONFIG_SYS_SDRAM_BASE + 0x100;
-#if defined(CONFIG_NOR) || defined(CONFIG_NAND)
-	gpmc_init();
-#endif
 	return 0;
 }
 
