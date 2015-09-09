@@ -330,27 +330,6 @@ static int setup_ram_buf(void)
 }
 #endif
 
-static int setup_fdt(void)
-{
-#ifdef CONFIG_OF_CONTROL
-# ifdef CONFIG_OF_EMBED
-	/* Get a pointer to the FDT */
-	gd->fdt_blob = __dtb_dt_begin;
-# elif defined CONFIG_OF_SEPARATE
-	/* FDT is at end of image */
-	gd->fdt_blob = (ulong *)&_end;
-# elif defined(CONFIG_OF_HOSTFILE)
-	if (read_fdt_from_file()) {
-		puts("Failed to read control FDT\n");
-		return -1;
-	}
-# endif
-	/* Allow the early environment to override the fdt address */
-	gd->fdt_blob = (void *)getenv_ulong("fdtcontroladdr", 16,
-						(uintptr_t)gd->fdt_blob);
-#endif
-	return 0;
-}
 
 /* Get the top of usable RAM */
 __weak ulong board_get_usable_ram_top(ulong total_size)
@@ -431,7 +410,7 @@ static int reserve_round_4k(void)
 }
 
 #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF)) && \
-		defined(CONFIG_ARM)
+	defined(CONFIG_ARM)
 static int reserve_mmu(void)
 {
 	/* reserve TLB table */
@@ -443,10 +422,12 @@ static int reserve_mmu(void)
 
 	gd->arch.tlb_addr = gd->relocaddr;
 	debug("TLB table from %08lx to %08lx\n", gd->arch.tlb_addr,
-	      gd->arch.tlb_addr + gd->arch.tlb_size);
+			gd->arch.tlb_addr + gd->arch.tlb_size);
 	return 0;
 }
 #endif
+
+
 
 #ifdef CONFIG_LCD
 static int reserve_lcd(void)
@@ -462,17 +443,6 @@ static int reserve_lcd(void)
 }
 #endif /* CONFIG_LCD */
 
-static int reserve_trace(void)
-{
-#ifdef CONFIG_TRACE
-	gd->relocaddr -= CONFIG_TRACE_BUFFER_SIZE;
-	gd->trace_buff = map_sysmem(gd->relocaddr, CONFIG_TRACE_BUFFER_SIZE);
-	debug("Reserving %dk for trace data at: %08lx\n",
-	      CONFIG_TRACE_BUFFER_SIZE >> 10, gd->relocaddr);
-#endif
-
-	return 0;
-}
 
 #if defined(CONFIG_VIDEO) && (!defined(CONFIG_PPC) || defined(CONFIG_8xx)) && \
 		!defined(CONFIG_ARM) && !defined(CONFIG_X86) && \
@@ -792,14 +762,10 @@ static int initf_malloc(void)
 
 static init_fnc_t init_sequence_f[] = {
 	setup_mon_len,
-	setup_fdt,
 	trace_early_init,
 	arch_cpu_init,		/* basic arch cpu dependent setup */
 	mark_bootstage,
 	initf_malloc,
-#if defined(CONFIG_BOARD_EARLY_INIT_F)
-	board_early_init_f,
-#endif
 #if defined(CONFIG_ARM) || defined(CONFIG_MIPS) || defined(CONFIG_BLACKFIN)
 	timer_init,		/* initialize timer */
 #endif
@@ -835,11 +801,10 @@ static init_fnc_t init_sequence_f[] = {
 	setup_dest_addr,
 	reserve_round_4k,
 #if !(defined(CONFIG_SYS_ICACHE_OFF) && defined(CONFIG_SYS_DCACHE_OFF)) && \
-		defined(CONFIG_ARM)
-	reserve_mmu,
+	        defined(CONFIG_ARM)
+	    reserve_mmu,
 #endif
 	reserve_uboot,
-	reserve_trace,
 #ifndef CONFIG_SPL_BUILD
 	reserve_malloc,
 	reserve_board,
