@@ -42,7 +42,7 @@
 #define CONFIG_SYS_LDSCRIPT		"board/ti/am335x/u-boot.lds"
 
 /* Always 128 KiB env size */
-#define CONFIG_ENV_SIZE			(128 << 10)
+#define CONFIG_ENV_SIZE			(3 << 10)
 
 /* Enhance our eMMC support / experience. */
 #define CONFIG_CMD_GPT
@@ -72,6 +72,7 @@
 #define CONFIG_ENV_VARS_UBOOT_RUNTIME_CONFIG
 
 #ifndef CONFIG_SPL_BUILD
+#if 0
 #define CONFIG_EXTRA_ENV_SETTINGS \
 	DEFAULT_LINUX_BOOT_ENV \
 	"boot_fdt=try\0" \
@@ -186,6 +187,7 @@
 			"echo WARNING: Could not determine device tree to use; fi; \0" \
 	NANDARGS 
 #endif
+#endif
 
 #define CONFIG_BOOTCOMMAND \
 	"if userbutton; then " \
@@ -210,8 +212,13 @@
 #define CONFIG_CMD_EEPROM
 #define CONFIG_ENV_EEPROM_IS_ON_I2C
 #define CONFIG_SYS_I2C_EEPROM_ADDR	0x50	/* Main EEPROM */
+#define CONFIG_SYS_DEF_EEPROM_ADDR	0x50
 #define CONFIG_SYS_I2C_EEPROM_ADDR_LEN	2
 #define CONFIG_SYS_I2C_MULTI_EEPROMS
+#define CONFIG_SYS_EEPROM_PAGE_WRITE_DELAY_MS 10
+#define CONFIG_ENV_IS_IN_EEPROM
+#define CONFIG_SYS_EEPROM_PAGE_WRITE_BITS	5
+#define CONFIG_ENV_OFFSET	0x50
 
 /* PMIC support */
 #define CONFIG_POWER_TPS65217
@@ -269,7 +276,5 @@
 #define CONFIG_PHYLIB
 #define CONFIG_PHY_SMSC
 
-
-#define CONFIG_ENV_IS_NOWHERE
 
 #endif	/* ! __CONFIG_AM335X_EVM_H */
